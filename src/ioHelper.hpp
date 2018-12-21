@@ -7,9 +7,8 @@
 using namespace std;
 
 problem* readProblem(string filename) {
-    filename = "./../Instances/" + filename;
     problem* p = new problem(filename);
-    
+    filename = "./../instances/" + filename;
     ifstream readFile(filename, ios::in);
     readFile >> p->numOfFac >> p->numOfCus;
 
@@ -26,7 +25,6 @@ problem* readProblem(string filename) {
         readFile >> a;
         p->cusDemand.push_back(a);
     }
-    
 
     // demand cost
     for(int i = 0; i < p->numOfFac; ++i) {
@@ -40,5 +38,19 @@ problem* readProblem(string filename) {
     return p;
 }
 
+void writeResult(string filename = "SA", problem* p, double time, vector<int> freeCapacity, vector<int> cusToFac) {
+    // cout << "Problem: " << p->file << endl;
+    // cout << "Time: " << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
+    // cout << "Total Cost: " << totalCost << endl;
+    // cout << "Facility Status: ";
+    // for (int i = 0; i < p->numOfFac; ++i)
+    //     cout << (freeCapacity[i] != p->facCapacity[i]) << " ";
+    // cout << endl;
+    // cout << "Customer State: ";
+    // for (int i = 0; i < p->numOfCus; ++i)
+    //     cout << cusToFac[i] << " ";
+    filename = "./../result/" + filename + ".csv";
+    ofstream writeFile(filename, ios::out);
+}
 
 #endif

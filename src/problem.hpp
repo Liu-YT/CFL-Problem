@@ -23,9 +23,10 @@ struct problem {
     // facility fixed cost of opening
     vector<int> facFixedCost;
 
+    // customer demand
     vector<int> cusDemand;
-    
-    // customer, cusCost
+
+    // customer,  assignment of customers to facilities
     map<int, vector<int> > useCost;
 
     problem(string file) {
