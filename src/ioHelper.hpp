@@ -8,8 +8,13 @@ using namespace std;
 
 problem* readProblem(string filename) {
     problem* p = new problem(filename);
-    filename = "./../instances/" + filename;
+    filename = "./instances/" + filename;
     ifstream readFile(filename, ios::in);
+
+    if(readFile == nullptr) {
+        cerr << "Open file faild" << endl;
+    }
+
     readFile >> p->numOfFac >> p->numOfCus;
 
     int a, b;
@@ -38,19 +43,17 @@ problem* readProblem(string filename) {
     return p;
 }
 
-void writeResult(string filename = "SA", problem* p, double time, vector<int> freeCapacity, vector<int> cusToFac) {
-    // cout << "Problem: " << p->file << endl;
-    // cout << "Time: " << (double)(endTime - startTime) / CLOCKS_PER_SEC << "s" << endl;
-    // cout << "Total Cost: " << totalCost << endl;
-    // cout << "Facility Status: ";
-    // for (int i = 0; i < p->numOfFac; ++i)
-    //     cout << (freeCapacity[i] != p->facCapacity[i]) << " ";
-    // cout << endl;
-    // cout << "Customer State: ";
-    // for (int i = 0; i < p->numOfCus; ++i)
-    //     cout << cusToFac[i] << " ";
-    filename = "./../result/" + filename + ".csv";
-    ofstream writeFile(filename, ios::out);
+void writeResult(problem *p, long long int result, double costTime, vector<int> freeCapacity, vector<int> cusToFac, string filename = "SA") {
+    filename = "./result/csv/" + filename + ".csv";
+    ofstream writeFile(filename, ios::app);
+    writeFile << p->file << "," << result << "," << costTime << ",";
+    for (int i = 0; i < p->numOfFac; ++i)
+        writeFile << (freeCapacity[i] != p->facCapacity[i]) << " ";
+    writeFile << ",";
+    for (int i = 0; i < p->numOfCus; ++i)
+        writeFile << cusToFac[i] << " ";
+    writeFile << endl;
+    writeFile.close();
 }
 
 #endif

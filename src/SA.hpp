@@ -8,10 +8,7 @@
 #include "problem.hpp"
 using namespace std;
 
-#define SEARCHTIMES 5000
-
-// 计时
-clock_t startTime, endTime;
+int SEARCHTIMES;
 
 // 初始温度
 double T;
@@ -31,7 +28,8 @@ vector<int> cusToFac;
 // 初始化全局变量
 void init(problem* p) {
     T = 100;
-    alpha = 0.9;
+    alpha = 0.8;
+    SEARCHTIMES = (p->numOfCus * (p->numOfCus-1)) / 2;
     totalCost = 0;
     freeCapacity = p->facCapacity;
     cusToFac = vector<int>(p->numOfCus);
@@ -59,13 +57,13 @@ void printDebugInfo(problem* p) {
     for (int i = 0; i < p->numOfFac; ++i)
         cout << (freeCapacity[i] != p->facCapacity[i]) << " ";
     cout << endl;
-    cout << "Customer State: ";
+    cout << "Customer Status: ";
     for (int i = 0; i < p->numOfCus; ++i)
         cout << cusToFac[i] << " ";
     cout << endl << endl;
 }
 
-void SA(problem* p) {
+void SA(problem* p, bool exportResult) {
     startTime = clock();
 
     // 初始化信息
@@ -124,6 +122,9 @@ void SA(problem* p) {
 
     endTime = clock();
 
+    if (exportResult)
+        writeResult(p, totalCost, (double)(endTime - startTime) / CLOCKS_PER_SEC, freeCapacity, cusToFac, "SA");
+   
     printDebugInfo(p);
 }
 

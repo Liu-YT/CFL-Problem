@@ -5,7 +5,11 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <ctime>
 using namespace std;
+
+// 计时
+clock_t startTime, endTime;
 
 struct problem {
     // record
