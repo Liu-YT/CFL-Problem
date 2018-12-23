@@ -1,7 +1,7 @@
 #ifndef PROBLEM_HPP
 #define PROBLEM_HPP
 
-#include <Map>
+#include <map>
 #include <string>
 #include <vector>
 #include <iostream>

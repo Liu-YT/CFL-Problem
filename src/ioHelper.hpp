@@ -11,7 +11,7 @@ problem* readProblem(string filename) {
     filename = "./instances/" + filename;
     ifstream readFile(filename, ios::in);
 
-    if(readFile == nullptr) {
+    if(!readFile) {
         cerr << "Open file faild" << endl;
     }
 

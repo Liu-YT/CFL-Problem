@@ -16,7 +16,7 @@ using namespace std;
 #define MAXGEN 200
 
 // 交叉概率
-#define PXOVER 0.9
+#define PXOVER 0.8
 
 // 变异概率
 #define PMUTATION 0.2
@@ -82,6 +82,7 @@ int evalute(problem *p, individual *ind) {
 void initPopulation(problem* p) {
     // 为了加速较优个体的产生，初始时候通过贪心加入一部分个体
 
+    // 随机生成解
     for(int i = 0; i < POSIZE / 2; ++i) {
         individual* ind = new individual(p);
         for(int j = 0; j < p->numOfCus; ++j) {
@@ -96,6 +97,7 @@ void initPopulation(problem* p) {
         
     }
 
+    // 贪心生成解
     vector<int> temp;
     for(int i = 0; i < p->numOfCus; ++i) temp.push_back(i);
     for(int i = 0; i < POSIZE / 2; ++i) {
